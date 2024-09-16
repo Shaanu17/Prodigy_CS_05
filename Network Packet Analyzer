@@ -1,0 +1,37 @@
+from scapy.all import sniff
+from scapy.layers.inet import IP, TCP, UDP, ICMP
+
+# Define a function to analyze packets
+def analyze_packet(packet):
+    # Check if the packet has an IP layer (which includes source/destination IP)
+    if IP in packet:
+        ip_src = packet[IP].src  # Source IP
+        ip_dst = packet[IP].dst  # Destination IP
+        protocol = packet[IP].proto  # Protocol number
+
+        # Identify protocol type (TCP/UDP/ICMP or other)
+        if TCP in packet:
+            proto_name = "TCP"
+        elif UDP in packet:
+            proto_name = "UDP"
+        elif ICMP in packet:
+            proto_name = "ICMP"
+        else:
+            proto_name = f"Other (Protocol Number {protocol})"
+
+        # Display packet info
+        print(f"Source IP: {ip_src} -> Destination IP: {ip_dst}")
+        print(f"Protocol: {proto_name}")
+        
+        # Optionally print payload data if TCP/UDP
+        if TCP in packet or UDP in packet:
+            payload = bytes(packet[TCP].payload).decode(errors="ignore")
+            if payload:
+                print(f"Payload: {payload}")
+        
+        print("-" * 50)
+
+# Start sniffing network packets
+# You can specify the interface with the iface argument (e.g., 'eth0' or 'wlan0')
+print("Starting packet sniffing...")
+sniff(prn=analyze_packet, filter="ip", store=0)
