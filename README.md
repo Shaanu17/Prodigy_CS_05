@@ -1,2 +1,2 @@
-# Prodigy_CS_05
-Network Packet Analyzer
+# Prodigy_CS_02
+Pixel manipulation for Image Encryption
