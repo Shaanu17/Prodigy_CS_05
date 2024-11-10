@@ -1,4 +1,4 @@
-In this project i develop a basic packet sniffer tool using a pre-defined libraries.In this project we can use Python with the scapy library, which is excellent for capturing and analyzing network packet.
+It is a basic packet sniffer tool using a pre-defined libraries.In this project we can use Python with the scapy library, which is excellent for capturing and analyzing network packet.
 
 Steps to run the network packet analyzer
 First we have to install scapy using command in cmd or terminal : pip install scapy
